@@ -1,4 +1,30 @@
-body {
+/* ----------------------------- */
+
+/* div {
+  line-height: 50px;
+  font-size: 30px;
+  font-family: arial;
+}
+
+button {
+  background-color: fff;
+  border: 2px solid black;
+  font-weight: bold;
+  font-size: 30px;
+  width: 70px;
+  height: 70px;
+  margin-left: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.3;
+} */
+
+/* ----------------------------- */
+
+/* body {
   margin: 20px;
   font-family: roboto, sans-serif;
   font-size: 20px;
@@ -10,7 +36,9 @@ h1 {
 
 button {
   font-size: 24px;
-}
+} */
+
+/* ----------------------------- */
 
 /* body {
   text-align: center;
