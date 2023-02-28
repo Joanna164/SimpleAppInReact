@@ -1,38 +1,67 @@
-class App extends React.Component {
+const ValidationMessage = (props) => <p>{props.txt}</p>;
+
+const OrderForm = (props) => {
+  const { submit, isConfirmed, change } = props;
+  return (
+    <form onSubmit={submit}>
+      <input type="checkbox" id="age" onChange={change} checked={isConfirmed} />
+      <label htmFor="age">Mam co najmniej 16 lat</label>
+      <br />
+      <button type="sumbmit">Kup bilet</button>
+    </form>
+  );
+};
+
+class TicketShop extends React.Component {
   state = {
-    value: "",
+    isConfirmed: false,
+    isFormSubmitted: false,
   };
 
-  handleChange = (e) => {
-    console.log("Zawartość e evencie:" + e.target.value);
-    console.log("Zawartość value przed setState:" + this.state.value);
+  handleCheckboxChange = () => {
     this.setState({
-      value: e.target.value,
+      isConfirmed: !this.state.isConfirmed,
+      isFormSubmitted: false,
     });
-    console.log("Zawartość value po setState:" + this.state.value);
   };
 
-  handleClick = () => {
-    this.setState({
-      value: "",
-    });
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!this.state.isFormSubmitted) {
+      this.setState({
+        isFormSubmitted: true,
+      });
+    }
+  };
+
+  displayMessage = () => {
+    if (this.state.isFormSubmitted) {
+      if (this.state.isConfirmed) {
+        return <ValidationMessage txt="Mozesz obejrzeć film." />;
+      } else {
+        return (
+          <ValidationMessage txt="Nie mozesz obejrzeć filmu jeśli masz mniej niz 16 lat!" />
+        );
+      }
+    } else {
+      return null;
+    }
   };
 
   render() {
-    console.log("Zawartość value w trakcie metody render:" + this.state.value);
+    const { isConfirmed } = this.state;
     return (
       <>
-        <input
-          value={this.state.value}
-          placeholder="wpisz..."
-          onChange={this.handleChange}
-          type="text"
+        <h1>Kup bilet na horror roku!</h1>
+        <OrderForm
+          change={this.handleCheckboxChange}
+          submit={this.handleFormSubmit}
+          checked={isConfirmed}
         />
-        <button onClick={this.handleClick}>Reset</button>
-        <h1 className="title">{this.state.value.toUpperCase()}</h1>
+        {this.displayMessage()}
       </>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<TicketShop />, document.getElementById("root"));
